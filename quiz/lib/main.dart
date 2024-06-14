@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'view/home_screen.dart';
+import 'view/quiz_screen.dart';
+
 
 
 void main() {
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
       home: HomeScreen(),
       routes: {
         '/quiz': (context) => QuizScreen(),
-        '/explanation': (context) => ExplanationScreen(),
+        //'/explanation': (context) => ExplanationScreen(),
       },
     );
   }
