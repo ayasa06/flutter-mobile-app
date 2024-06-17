@@ -7,12 +7,13 @@ class QuizScreen extends StatefulWidget {
 
 class _QuizScreenState extends State<QuizScreen> {
   int questionNumber = 1;
-  String mushroomName = 'Mushroom 1'; // Replace with actual data
-  String mushroomImage = 'assets/kinoko_tukiyotake.png'; // Replace with actual data
+  String mushroomName = 'アカハツ'; // Replace with actual data
+  String mushroomImage =
+      'assets/kinoko_tukiyotake.png'; // Replace with actual data
 
   void _answer(bool isEdible) {
     Navigator.pushNamed(
-      context, 
+      context,
       '/explanation',
       arguments: {
         'isEdible': isEdible,
@@ -26,14 +27,35 @@ class _QuizScreenState extends State<QuizScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Question $questionNumber'),
+        title: Text('Mushroom Quiz'),
+        backgroundColor: Colors.orange,
       ),
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.only(
+            top: 40.0, left: 20.0, right: 20.0), // Added top padding
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start, // Align to the top
           children: [
-            Text(mushroomName, style: TextStyle(fontSize: 24)),
-            Image.asset(mushroomImage),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                '$questionNumber/10',
+                style: TextStyle(fontSize: 24),
+              ),
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: Text(
+                mushroomName,
+                style: TextStyle(fontSize: 24),
+              ),
+            ),
+            SizedBox(height: 10.0), // Reduced space between text and image
+            Image.asset(
+              mushroomImage,
+              height: 200.0,
+            ),
+            SizedBox(height: 60.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -41,6 +63,13 @@ class _QuizScreenState extends State<QuizScreen> {
                   onPressed: () => _answer(false),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFFFF4F50),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 20.0, horizontal: 40.0),
+                    textStyle: TextStyle(fontSize: 20),
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(8.0), // More rectangular shape
+                    ),
                   ),
                   child: Text('有毒'),
                 ),
@@ -48,6 +77,13 @@ class _QuizScreenState extends State<QuizScreen> {
                   onPressed: () => _answer(true),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFF4169E1),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 20.0, horizontal: 40.0),
+                    textStyle: TextStyle(fontSize: 20),
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(8.0), // More rectangular shape
+                    ),
                   ),
                   child: Text('食用'),
                 ),
@@ -55,6 +91,10 @@ class _QuizScreenState extends State<QuizScreen> {
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: Container(
+        height: 40.0,
+        color: Colors.orange,
       ),
     );
   }
