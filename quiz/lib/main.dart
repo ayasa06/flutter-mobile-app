@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       home: HomeScreen(),
       routes: {
         '/quiz': (context) => QuizScreen(),
-        //'/explanation': (context) => ExplanationScreen(),
+        '/explanation': (context) => ExplanationScreen(),
       },
     );
   }
