@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'view/home_screen.dart';
 import 'view/quiz_screen.dart';
+import 'view/explanation_screen.dart';
 
 
 void main() {
