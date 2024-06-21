@@ -27,7 +27,7 @@ class _QuizScreenState extends State<QuizScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Mushroom Quiz'),
+        title: Text('Quiz'),
         backgroundColor: Colors.orange,
       ),
       body: Padding(
