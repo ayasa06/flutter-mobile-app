@@ -7,47 +7,60 @@ class ExplanationScreen extends StatelessWidget {
     bool isEdible = arguments['isEdible'];
     String mushroomName = arguments['mushroomName'];
     String mushroomImage = arguments['mushroomImage'];
+    bool correctAnswer = false; // ツキヨタケは有毒なので、正解は false
+
 
     return Scaffold(
       appBar: AppBar(
         title: Text('Explanation'),
+        backgroundColor: Colors.orange,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            isEdible
-                ? Image.asset(
-                    'assets/kinoko_tukiyotake.png') // Replace with correct image
-                : Image.asset(
-                    'assets/kinoko_tukiyotake.png'), // Replace with correct image
-            Text(
-              isEdible ? '正解' : '不正解',
-              style: TextStyle(fontSize: 24),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 80.0, left: 20.0, right: 20.0, bottom: 20.0), // Adjusted padding to move content down
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.asset(isEdible == correctAnswer ? 'assets/ok.png' : 'assets/no.png', height: 100.0), // バツまたは丸の画像
+                SizedBox(height: 10.0),
+                Text(
+                  isEdible == correctAnswer ? '正解: 有毒' : '不正解: 有毒',
+                  style: TextStyle(fontSize: 24, color: Colors.black),
+                ),
+                SizedBox(height: 10.0),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    
+                    backgroundColor: Color(0xFFD9D9D9), // Changed button color to D9D9D9
+                    padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 30.0),
+                    textStyle: TextStyle(fontSize: 20),
+                  ),
+                  child: Text('次へ進む'),
+                ),
+                SizedBox(height: 20.0),
+                Text(
+                  'ツキヨタケは有毒なキノコの１つ\n'
+                  '見た目がマツタケに似ているが、\n'
+                  'マツタケと違って赤い傘を持ち、\n'
+                  '白い斑点がある。',
+                  style: TextStyle(fontSize: 16),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 20.0),
+                Image.asset(mushroomImage, height: 150.0),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                isEdible
-                    ? 'このキノコは食用です。美味しく料理できます。'
-                    : 'このキノコは非常に毒性が高く、食べると危険です。',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16),
-              ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                // Go to next question or end quiz
-                Navigator.pop(context);
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFF4169E1),
-              ),
-              child: Text('次に進む'),
-            ),
-            Image.asset(mushroomImage), // Display selected mushroom image
-          ],
+          ),
         ),
+      ),
+      bottomNavigationBar: Container(
+        height: 40.0,
+        color: Colors.orange,
       ),
     );
   }
