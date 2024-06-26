@@ -7,7 +7,7 @@ class ExplanationScreen extends StatelessWidget {
     bool isEdible = arguments['isEdible'];
     String mushroomName = arguments['mushroomName'];
     String mushroomImage = arguments['mushroomImage'];
-    bool correctAnswer = false; // ツキヨタケは有毒なので、正解は false
+    bool correctAnswer = false;
 
 
     return Scaffold(
@@ -40,7 +40,7 @@ class ExplanationScreen extends StatelessWidget {
                     padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 30.0),
                     textStyle: TextStyle(fontSize: 20),
                   ),
-                  child: Text('次へ進む'),
+                  child: Text('次へ進む', style: TextStyle(color: Colors.black)),
                 ),
                 SizedBox(height: 20.0),
                 Text(
