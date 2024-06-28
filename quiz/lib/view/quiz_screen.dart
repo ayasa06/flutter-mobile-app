@@ -9,7 +9,7 @@ class _QuizScreenState extends State<QuizScreen> {
   int questionNumber = 1;
   String mushroomName = 'アカハツ'; // Replace with actual data
   String mushroomImage =
-      'assets/kinoko_tukiyotake.png'; // Replace with actual data
+      'assets/mushrooms/tukiyotake.png'; // Replace with actual data
 
   void _answer(bool isEdible) {
     Navigator.pushNamed(

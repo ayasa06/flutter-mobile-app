@@ -58,7 +58,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - assets/kinoko_tukiyotake.png
+    - assets/mushrooms/tukiyotake.png
     - assets/star.png
     - assets/book.png
     - assets/no.png
