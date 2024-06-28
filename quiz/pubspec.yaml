@@ -59,6 +59,14 @@ flutter:
   uses-material-design: true
   assets:
     - assets/mushrooms/tukiyotake.png
+    - assets/mushrooms/aisimezi.jpg
+    - assets/mushrooms/akahatu.jpg
+    - assets/mushrooms/akashitiotake.jpg
+    - assets/mushrooms/akamomitake.jpg
+    - assets/mushrooms/amigasatake.jpg
+    - assets/mushrooms/amitake.jpg
+    - assets/mushrooms/amihanaiguchi.jpg
+    - assets/mushrooms/awatake.jpg
     - assets/star.png
     - assets/book.png
     - assets/no.png
