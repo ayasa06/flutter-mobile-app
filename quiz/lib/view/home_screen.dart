@@ -8,43 +8,41 @@ class HomeScreen extends StatelessWidget {
         title: Text('Mushroom Quiz'),
         backgroundColor: Colors.orange,
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 80.0), // Adjusted top padding
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start, // Align to the top
-              children: [
-                _buildDifficultyButton(
-                  context,
-                  '初級者',
-                  1,
-                  '/quiz',
-                  'easy',
-                ),
-                _buildDifficultyButton(
-                  context,
-                  '中級者',
-                  3,
-                  '/quiz',
-                  'medium',
-                ),
-                _buildDifficultyButton(
-                  context,
-                  '上級者',
-                  5,
-                  '/quiz',
-                  'hard',
-                ),
-                SizedBox(height: 30.0),
-                _buildBookButton(
-                  context,
-                  'きのこ図鑑',
-                  'assets/book.png',
-                  '/book', // Replace with actual route
-                ),
-              ],
-            ),
+      body: Padding(
+        padding: const EdgeInsets.only(top: 80.0), // Adjusted top padding
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start, // Align to the top
+            children: [
+              _buildDifficultyButton(
+                context,
+                '初級者',
+                1,
+                '/quiz',
+                'easy',
+              ),
+              _buildDifficultyButton(
+                context,
+                '中級者',
+                3,
+                '/quiz',
+                'medium',
+              ),
+              _buildDifficultyButton(
+                context,
+                '上級者',
+                5,
+                '/quiz',
+                'hard',
+              ),
+              SizedBox(height: 30.0),
+              _buildBookButton(
+                context,
+                'きのこ図鑑',
+                'assets/book.png',
+                '/mushroom_catalog', // Correct route
+              ),
+            ],
           ),
         ),
       ),
