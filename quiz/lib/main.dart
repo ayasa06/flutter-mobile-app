@@ -4,6 +4,8 @@ import 'view/home_screen.dart';
 import 'view/quiz_screen.dart';
 import 'view/explanation_screen.dart';
 import 'view/mushroom_catalog_screen.dart';
+import 'view/mushroom_detail_screen.dart'; 
+
 
 void main() {
   runApp(MyApp());
@@ -23,6 +25,8 @@ class MyApp extends StatelessWidget {
         '/home': (context) => HomeScreen(),
         '/quiz': (context) => QuizScreen(),
         '/explanation': (context) => ExplanationScreen(),
+        '/mushroom_catalog': (context) => MushroomCatalogScreen(), 
+        '/mushroom_detail': (context) => MushroomDetailScreen(), 
      
       },
     );
