@@ -67,6 +67,9 @@ flutter:
     - assets/mushrooms/amitake.jpg
     - assets/mushrooms/amihanaiguchi.jpg
     - assets/mushrooms/awatake.jpg
+    - assets/mushrooms/dokuturutake.jpg
+    - assets/mushrooms/matutake.jpg
+    - assets/mushrooms/kaentake.jpg
     - assets/star.png
     - assets/book.png
     - assets/no.png
