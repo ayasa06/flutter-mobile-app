@@ -76,6 +76,13 @@ class _QuizScreenState extends State<QuizScreen> {
                 style: TextStyle(fontSize: 24),
               ),
             ),
+            SizedBox(height: 10.0),
+            Text(
+              questionText,
+              style: TextStyle(fontSize: 20),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 20.0),
             Align(
               alignment: Alignment.center,
               child: Text(
@@ -92,19 +99,24 @@ class _QuizScreenState extends State<QuizScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: options.map((option) {
-                return ElevatedButton(
-                  onPressed: () {
-                    _answer(option == correctAnswer, mushroomName, mushroomImage);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: option == 'はい' ? Color(0xFFFF4F50) : Color(0xFF4169E1),
-                    padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 40.0),
-                    textStyle: TextStyle(fontSize: 20),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
+                return Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        _answer(option == correctAnswer, mushroomName, mushroomImage);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: option == 'はい' ? Color(0xFFFF4F50) : Color(0xFF4169E1),
+                        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+                        textStyle: TextStyle(fontSize: 20, color: Colors.black),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                      ),
+                      child: Text(option, style: TextStyle(color: Colors.black)),
                     ),
                   ),
-                  child: Text(option),
                 );
               }).toList(),
             ),
