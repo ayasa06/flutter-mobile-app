@@ -71,7 +71,11 @@ flutter:
     - assets/mushrooms/dokuturutake.jpg
     - assets/mushrooms/matutake.jpg
     - assets/mushrooms/kaentake.jpg
-    - assets/mushrooms/anzutake.jpg
+    - assets/mushrooms/akatake.jpg
+    - assets/mushrooms/anzudake.jpg
+    - assets/mushrooms/itachitake.jpg
+    - assets/mushrooms/inusenbontake.jpg
+    - assets/mushrooms/irogawari.jpg
     - assets/star.png
     - assets/book.png
     - assets/no.png
@@ -81,6 +85,7 @@ flutter:
     - assets/left.png
     - assets/search.png
     - assets/skull.png
+    - assets/kinoko_logo.png
   
 
   
