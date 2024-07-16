@@ -10,12 +10,17 @@ class MushroomCatalogScreen extends StatelessWidget {
     {'name': 'アミタケ', 'image': 'assets/mushrooms/amitake.jpg'},
     {'name': 'アミハナイグチ', 'image': 'assets/mushrooms/amihanaiguchi.jpg'},
     {'name': 'アワタケ', 'image': 'assets/mushrooms/awatake.jpg'},
+    {'name': 'アカタケ', 'image': 'assets/mushrooms/akatake.jpg'},
+    {'name': 'アンズダケ', 'image': 'assets/mushrooms/anzudake.jpg'},
+    {'name': 'イタチタケ', 'image': 'assets/mushrooms/itachitake.jpg'},
+    {'name': 'イヌセンボンタケ', 'image': 'assets/mushrooms/inusenbontake.jpg'},
+    {'name': 'イロガワリ', 'image': 'assets/mushrooms/irogawari.jpg'},
     // 他のキノコも同様に追加
   ];
 
   @override
   Widget build(BuildContext context) {
-    // 名前の最初の文字でグループ分け
+    // 名前の最初の文字でグループ分け 
     Map<String, List<Map<String, String>>> groupedMushrooms = {};
     for (var mushroom in mushrooms) {
       String firstLetter = mushroom['name']![0];
@@ -30,7 +35,7 @@ class MushroomCatalogScreen extends StatelessWidget {
         title: Text('きのこ図鑑'),
         backgroundColor: Colors.orange,
         leading: IconButton(
-          icon: Image.asset('assets/left.png'), // 左矢印の画像
+          icon: Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -42,10 +47,7 @@ class MushroomCatalogScreen extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: TextField(
               decoration: InputDecoration(
-                prefixIcon: Container(
-                  padding: EdgeInsets.all(5.0), // Add padding to shrink the icon
-                  child: Image.asset('assets/search.png', height: 20.0), // 虫眼鏡の画像を小さくする
-                ),
+                prefixIcon: Icon(Icons.search), // 虫眼鏡のアイコンをIconウィジェットに変更
                 hintText: 'Search',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.0),

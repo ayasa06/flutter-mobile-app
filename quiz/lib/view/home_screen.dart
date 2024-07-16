@@ -42,9 +42,29 @@ class HomeScreen extends StatelessWidget {
                 'assets/book.png',
                 '/mushroom_catalog', // Correct route
               ),
+              SizedBox(height: 20.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start, // Align to the start (left)
+                children: [
+                  SizedBox(width: 20.0), // Add left padding
+                  Image.asset('assets/kinoko_logo.png', height: 50.0),
+                  SizedBox(width: 10.0),
+                  Text(
+                    'HelloWorld!!',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: Container(
+        height: 40.0,
+        color: Colors.orange,
       ),
     );
   }

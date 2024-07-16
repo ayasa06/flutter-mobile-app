@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../database/database_helper.dart';
+import 'result_screen.dart'; // ResultScreenのインポートを追加
 
 class QuizScreen extends StatefulWidget {
   @override
@@ -8,6 +9,7 @@ class QuizScreen extends StatefulWidget {
 
 class _QuizScreenState extends State<QuizScreen> {
   int questionNumber = 1;
+  int correctAnswers = 0;
   late List<Map<String, dynamic>> _quizData;
   bool _isLoading = true;
 
@@ -20,6 +22,7 @@ class _QuizScreenState extends State<QuizScreen> {
   Future<void> _fetchQuizData() async {
     var db = DatabaseHelper.instance;
     _quizData = await db.queryRowsByDifficulty('easy');
+    _quizData = _quizData.map((q) => {...q, 'is_correct': false}).toList(); // 正解情報を追加
     print('Fetched quiz data count: ${_quizData.length}');
     setState(() {
       _isLoading = false;
@@ -53,7 +56,6 @@ class _QuizScreenState extends State<QuizScreen> {
     }
 
     Map<String, dynamic> currentQuestion = _quizData[questionNumber - 1];
-    String questionText = currentQuestion[DatabaseHelper.columnQuestion];
     String correctAnswer = currentQuestion[DatabaseHelper.columnAnswer];
     String mushroomName = currentQuestion[DatabaseHelper.columnMushroomName];
     String mushroomImage = currentQuestion[DatabaseHelper.columnMushroomImage];
@@ -64,7 +66,7 @@ class _QuizScreenState extends State<QuizScreen> {
         title: Text('Mushroom Quiz'),
         backgroundColor: Colors.orange,
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.only(top: 40.0, left: 20.0, right: 20.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -77,12 +79,6 @@ class _QuizScreenState extends State<QuizScreen> {
               ),
             ),
             SizedBox(height: 10.0),
-            Text(
-              questionText,
-              style: TextStyle(fontSize: 20),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 20.0),
             Align(
               alignment: Alignment.center,
               child: Text(
@@ -107,7 +103,7 @@ class _QuizScreenState extends State<QuizScreen> {
                         _answer(option == correctAnswer, mushroomName, mushroomImage);
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: option == 'はい' ? Color(0xFFFF4F50) : Color(0xFF4169E1),
+                        backgroundColor: option == '有毒' ? Color(0xFFFF4F50) : Color(0xFF4169E1),
                         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
                         textStyle: TextStyle(fontSize: 20, color: Colors.black),
                         shape: RoundedRectangleBorder(
@@ -124,13 +120,37 @@ class _QuizScreenState extends State<QuizScreen> {
         ),
       ),
       bottomNavigationBar: Container(
-        height: 40.0,
+        height: 70.0,
         color: Colors.orange,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 16.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  _showQuitDialog();
+                },
+                child: Text('中断', style: TextStyle(color: Colors.black)),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                  textStyle: TextStyle(fontSize: 16),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 
   void _answer(bool isCorrect, String mushroomName, String mushroomImage) async {
+    if (isCorrect) {
+      correctAnswers++;
+      _quizData[questionNumber - 1]['is_correct'] = true; // 正解情報を更新
+    }
+
     bool? shouldContinue = await Navigator.pushNamed(
       context,
       '/explanation',
@@ -146,7 +166,58 @@ class _QuizScreenState extends State<QuizScreen> {
         questionNumber++;
       });
     } else if (shouldContinue == true) {
-      Navigator.pop(context);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ResultScreen(correctAnswers: correctAnswers, quizData: _quizData),
+        ),
+      );
     }
+  }
+
+  void _showQuitDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          contentPadding: EdgeInsets.all(20),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('クイズを中断しますか？', style: TextStyle(fontSize: 18)),
+                  IconButton(
+                    icon: Icon(Icons.close),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+              SizedBox(height: 20),
+              Align(
+                alignment: Alignment.centerRight,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      '/home',
+                      (route) => false,
+                    );
+                  },
+                  child: Text('はい', style: TextStyle(color: Colors.black)),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }

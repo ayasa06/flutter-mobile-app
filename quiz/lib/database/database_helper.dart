@@ -28,7 +28,6 @@ class DatabaseHelper {
       await prefs.setStringList('quizData', quizList);
       return 1;
     } else {
-      // モバイル/デスクトップ用のコードをここに追加
       throw UnsupportedError("Unsupported platform");
     }
   }
@@ -39,7 +38,6 @@ class DatabaseHelper {
       List<String> quizList = prefs.getStringList('quizData') ?? [];
       return quizList.map((item) => Map<String, dynamic>.from(json.decode(item))).toList();
     } else {
-      // モバイル/デスクトップ用のコードをここに追加
       throw UnsupportedError("Unsupported platform");
     }
   }
@@ -51,7 +49,6 @@ class DatabaseHelper {
       List<Map<String, dynamic>> allRows = quizList.map((item) => Map<String, dynamic>.from(json.decode(item))).toList();
       return allRows.where((row) => row[columnDifficulty] == difficulty).toList();
     } else {
-      // モバイル/デスクトップ用のコードをここに追加
       throw UnsupportedError("Unsupported platform");
     }
   }
